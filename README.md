@@ -1,6 +1,6 @@
 # Pipeline NYC Taxi avec Snowflake
 
-Projet : chargement des trajets des taxis jaunes de New York (année 2025, environ 40 millions de lignes) dans Snowflake, nettoyage et création de tables d'analyse.
+Projet : chargement des trajets des taxis jaunes de New York (année 2025, 48,7 millions de lignes brutes, 43,9 millions après nettoyage) dans Snowflake, nettoyage et création de tables d'analyse.
 
 ## Architecture
 
@@ -21,7 +21,8 @@ Fichiers Parquet → RAW → STAGING → FINAL
 │   └── data_quality_report.md    # rapport qualité et KPIs
 ├── sql/                          # scripts SQL à exécuter dans Snowflake
 ├── src/load_data.py              # chargement des fichiers dans Snowflake
-├── dbt_nyc_taxi/                 # projet dbt 
+├── dbt_nyc_taxi/                 # projet dbt
+├── .github/workflows/            # pipeline GitHub Actions
 ├── .env.example                  # modèle pour les credentials
 └── pyproject.toml
 ```
@@ -37,7 +38,13 @@ pip install -e ".[notebook]"
 cp .env.example .env
 ```
 
-Remplir ensuite le fichier `.env` avec ses identifiants Snowflake.
+Remplir ensuite le fichier `.env` avec ses identifiants Snowflake :
+
+- `SNOWFLAKE_ACCOUNT` : au format `ORGANISATION-COMPTE`
+- `SNOWFLAKE_USER` : le login name (souvent l'adresse email), pas le nom affiché
+- `SNOWFLAKE_PASSWORD` : entre guillemets simples s'il contient des caractères spéciaux
+
+Ces valeurs sont visibles dans Snowsight : nom en bas à gauche → Account → View account details → Config File.
 
 ## Exécution
 
@@ -50,7 +57,7 @@ Remplir ensuite le fichier `.env` avec ses identifiants Snowflake.
 | 5 | `sql/04_final.sql` | Worksheet Snowflake |
 | 6 | `sql/05_kpis.sql` | Worksheet Snowflake |
 
-Le détail de chaque étape est dans [docs/journal_de_bord.md](docs/journal_de_bord.md).
+Dans Snowsight, exécuter chaque script en entier (tout sélectionner puis Ctrl+Entrée).
 
 ## dbt
 
