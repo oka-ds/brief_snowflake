@@ -1,6 +1,6 @@
 # Pipeline NYC Taxi avec Snowflake
 
-Projet de formation Data Engineer : chargement des trajets des taxis jaunes de New York (année 2025, environ 40 millions de lignes) dans Snowflake, nettoyage et création de tables d'analyse.
+Projet : chargement des trajets des taxis jaunes de New York (année 2025, environ 40 millions de lignes) dans Snowflake, nettoyage et création de tables d'analyse.
 
 ## Architecture
 
@@ -17,14 +17,12 @@ Fichiers Parquet → RAW → STAGING → FINAL
 ```
 ├── docs/
 │   ├── nyc_taxi_dbt_DEV_IA.md    # le brief
-│   ├── journal_de_bord.md        # détail de ce qui a été fait, étape par étape
 │   ├── design.md                 # architecture et description des tables
-│   ├── data_quality_report.md    # rapport qualité et KPIs
-│   └── dbt_explication.md        # comment fonctionne la partie dbt
+│   └── data_quality_report.md    # rapport qualité et KPIs
 ├── sql/                          # scripts SQL à exécuter dans Snowflake
 ├── src/load_data.py              # chargement des fichiers dans Snowflake
-├── dbt_nyc_taxi/                 # projet dbt (mêmes transformations, avec tests)
-├── .env.example                  # modèle pour les identifiants
+├── dbt_nyc_taxi/                 # projet dbt 
+├── .env.example                  # modèle pour les credentials
 └── pyproject.toml
 ```
 
@@ -67,7 +65,7 @@ dbt docs generate && dbt docs serve    # documentation et lignage
 
 ## Orchestration
 
-Le workflow `.github/workflows/pipeline.yml` lance le chargement puis `dbt build` chaque 1er du mois, ou à la main depuis l'onglet Actions de GitHub. Les identifiants Snowflake sont à mettre dans les secrets du dépôt, avec les mêmes noms que dans `.env.example`.
+Le workflow `.github/workflows/pipeline.yml` lance le chargement puis `dbt build` chaque 1er du mois, ou à la main depuis l'onglet Actions de GitHub. Les identifiants Snowflake sont à mettre dans les secrets du repo, avec les mêmes noms que dans `.env.example`.
 
 ## Source des données
 
