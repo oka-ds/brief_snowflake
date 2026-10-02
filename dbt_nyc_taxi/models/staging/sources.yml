@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Données brutes chargées par src/load_data.py
+    database: NYC_TAXI_DB
+    schema: RAW
+    tables:
+      - name: yellow_taxi_trips
+        description: Trajets des taxis jaunes de New York (année 2025), sans modification

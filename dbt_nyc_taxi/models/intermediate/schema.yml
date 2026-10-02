@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: int_trip_metrics
+    description: Trajets nettoyés enrichis avec les métriques et les catégories du brief
+    columns:
+      - name: trip_duration_minutes
+        description: Durée du trajet en minutes
+        data_tests:
+          - not_null
+      - name: pickup_date
+        description: Date de prise en charge
+      - name: pickup_hour
+        description: Heure de prise en charge (0 à 23)
+      - name: pickup_day_name
+        description: Jour de la semaine (Mon, Tue, ...)
+      - name: pickup_month
+        description: Mois de prise en charge (1 à 12)
+      - name: avg_speed_mph
+        description: Vitesse moyenne en miles par heure (distance / durée)
+      - name: tip_percentage
+        description: Pourboire en pourcentage du tarif de base (NULL si le tarif est à 0)
+      - name: distance_category
+        description: Catégorie de distance du trajet
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Court', 'Moyen', 'Long', 'Très long']
+      - name: time_period
+        description: Période de la journée
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Rush Matinal', 'Journée', 'Rush Soir', 'Soirée', 'Nuit']
+      - name: day_type
+        description: Semaine ou Weekend
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Semaine', 'Weekend']

@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_yellow_taxi_trips
+    description: Trajets nettoyés (montants positifs, dates cohérentes, distance entre 0.1 et 100 miles, zones renseignées)
+    columns:
+      - name: pickup_datetime
+        description: Date et heure de prise en charge
+        data_tests:
+          - not_null
+      - name: dropoff_datetime
+        description: Date et heure de dépose
+        data_tests:
+          - not_null
+      - name: passenger_count
+        description: Nombre de passagers (1 si inconnu)
+        data_tests:
+          - not_null
+      - name: trip_distance
+        description: Distance du trajet en miles
+        data_tests:
+          - not_null
+      - name: pickup_location_id
+        description: Zone de départ
+        data_tests:
+          - not_null
+      - name: dropoff_location_id
+        description: Zone d'arrivée
+        data_tests:
+          - not_null
+      - name: fare_amount
+        description: Tarif de base en dollars
+      - name: tip_amount
+        description: Pourboire en dollars
+      - name: total_amount
+        description: Montant total payé en dollars
+        data_tests:
+          - not_null

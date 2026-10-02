@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "brief_snowflake"
+version = "0.1.0"
+description = "Pipeline NYC Taxi avec Snowflake et dbt"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas",
+    "duckdb",
+    "python-dotenv",
+    "requests",
+    "snowflake-connector-python",
+    "dbt-core",
+    "dbt-snowflake",
+]
+
+# Notebook-only / Dev dependencies
+[project.optional-dependencies]
+notebook = [
+    "jupyterlab",
+    "ipykernel",
+    "matplotlib",
+    "seaborn",
+    "ruff",
+]
+
+# Pas de package Python à installer : src/ contient juste des scripts
+[tool.setuptools]
+py-modules = []
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["src"]
+
+[tool.ruff.lint]
+# pycodestyle, Pyflakes, isort, pyupgrade, bugbear
+select = ["E", "F", "W", "I", "UP", "B"]

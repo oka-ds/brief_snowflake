@@ -1,0 +1,19 @@
+name: nyc_taxi
+version: "1.0.0"
+profile: nyc_taxi
+
+model-paths: ["models"]
+
+# Chaque dossier va dans son propre schéma Snowflake :
+# DBT_STAGING, DBT_INTERMEDIATE et DBT_MARTS
+models:
+  nyc_taxi:
+    staging:
+      +schema: staging
+      +materialized: view
+    intermediate:
+      +schema: intermediate
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table

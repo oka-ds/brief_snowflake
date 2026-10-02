@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: fact_trips
+    description: Table de faits des trajets (une ligne par trajet valide)
+    columns:
+      - name: pickup_datetime
+        description: Date et heure de prise en charge
+        data_tests:
+          - not_null
+      - name: pickup_location_id
+        description: Zone de départ
+        data_tests:
+          - not_null
+      - name: total_amount
+        description: Montant total payé en dollars
+        data_tests:
+          - not_null
+
+  - name: daily_summary
+    description: Résumé quotidien (nombre de trajets, distance moyenne, revenus)
+    columns:
+      - name: pickup_date
+        description: Jour de prise en charge
+        data_tests:
+          - unique
+          - not_null
+      - name: nb_trips
+        description: Nombre de trajets du jour
+        data_tests:
+          - not_null
+      - name: total_revenue
+        description: Somme des montants payés dans la journée
+
+  - name: zone_analysis
+    description: Analyse par zone de départ (volume, revenus, popularité)
+    columns:
+      - name: pickup_location_id
+        description: Zone de départ
+        data_tests:
+          - unique
+          - not_null
+      - name: nb_trips
+        description: Nombre de trajets au départ de la zone
+      - name: popularity_rank
+        description: Classement de la zone par nombre de trajets (1 = la plus populaire)
+        data_tests:
+          - not_null
+
+  - name: hourly_patterns
+    description: Patterns horaires (demande, revenus, vitesse moyenne)
+    columns:
+      - name: pickup_hour
+        description: Heure de la journée (0 à 23)
+        data_tests:
+          - unique
+          - not_null
+      - name: nb_trips
+        description: Nombre de trajets sur l'année pour cette heure
+      - name: avg_speed_mph
+        description: Vitesse moyenne en miles par heure
